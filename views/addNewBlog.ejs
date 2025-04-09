@@ -1,0 +1,21 @@
+<%- include('./partials/header.ejs')%>
+<%- include('./partials/navbar.ejs')%>
+
+<div class="container">
+    <form action="/blog/addNew" method="post" enctype="multipart/form-data">
+    <div class="m-3">
+        <label for="coverImage" class="form-label">Upload Cover Image</label>
+        <input class="form-control" type="file" id="coverImage" name="coverImage" required>
+      </div>
+      <div class="m-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="ttile" name="title" required>
+      </div>
+      <div class="m-3">
+        <label for="body" class="form-label">Body</label>
+        <textarea class="form-control" id="body" rows="3" name="body" required></textarea>
+      </div>
+      <button class="btn btn-primary d-block m-auto" type="submit">Submit</button>
+    </form> 
+</div>
+<%- include('./partials/footer.ejs')%>

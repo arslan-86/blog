@@ -1,0 +1,32 @@
+<%- include('./partials/header.ejs')%>
+<%- include('./partials/navbar.ejs')%>
+
+<div style="width: 30%; margin: 3rem auto 0px auto;">
+     <h2 class="mx-auto text-center" style="font-family:'Trebuchet MS', Arial, sans-serif">Login into Simple Blog</h2>
+    
+<form class="border border-gray p-4 rounded" action="/user/login" method="post">
+    <div class="form-group">
+      <label for="inputEmail">Email address</label>
+      <input type="email" class="form-control" name="email" id="inputEmail" aria-describedby="emailHelp" required>
+      
+    </div>
+    <div class="form-group mt-4">
+      <label for="inputPassword">Password</label>
+      <input type="password" name="password" class="form-control" id="inputPassword" required>
+    </div>
+   
+    
+    <label class="invisible" id="warningLabel" style="color: red; margin-top: 10px;">Invalid Email or Password</label>
+
+    <button type="submit" class="btn btn-primary d-block mt-4 mx-auto">Submit</button>
+
+    <label class="form-text d-block text-center mt-4">Not have an account? <a href="/user/signup">Register Here</a></label> 
+  </form>
+</div>
+
+
+<script>
+    const warningLabel = document.getElementById('warningLabel');
+</script>
+
+<%- include('./partials/footer.ejs')%>

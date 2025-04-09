@@ -1,0 +1,69 @@
+<%- include('./partials/header.ejs')%>
+<%- include('./partials/navbar.ejs')%>
+
+
+<div style="width: 30%; margin: 4rem auto 0px auto;">
+     <h2 class="mx-auto text-center" style="font-family:'Trebuchet MS', Arial, sans-serif">Signup</h2>
+    
+<form class="border border-gray p-4 rounded" id="form" action="/user/signup" method="post">
+
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" class="form-control" name="fullName" id="fullName" required>
+    </div>
+
+    <div class="form-group mt-4">
+        <label for="inputEmail">Email address</label>
+        <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" required>
+      </div>
+
+    <div class="form-group mt-4">
+      <label for="inputPassword">Password</label>
+      <input type="password" name="password" class="form-control" id="inputPassword" required>
+    </div>
+   
+    <div class="form-group mt-4">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
+      </div>
+    
+    <label class="invisible" id="warningLabel" style="color: red; margin-top: 10px;"></label>
+
+    <button type="submit" class="btn btn-primary d-block mt-4 mx-auto" id="sumbitBtn">Submit</button>
+
+    <!-- <label class="form-text d-block text-center mt-4">Not have an account? <a href="#">Register Here</a></label>  -->
+
+  </form>
+
+</div>
+
+
+<script>
+    
+    const sumbitBtn = document.getElementById('sumbitBtn');
+    const form = document.getElementById('form');
+
+    sumbitBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const inputEmail = document.getElementById("inputEmail").value;
+        const fullName = document.getElementById("fullName").value;
+        const password = document.getElementById("inputPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        const warningLabel = document.getElementById('warningLabel');
+
+
+        if(!inputEmail || !fullName || !password || !confirmPassword) {
+            warningLabel.innerHTML = "All fields must be filled";
+            warningLabel.classList.remove('invisible');
+        } else if(password !== confirmPassword) {
+            warningLabel.innerText = "Passwords do not match";
+            warningLabel.classList.remove('invisible')
+        } else {
+            warningLabel.classList.add('invisible');
+            form.submit();
+        } 
+    })
+</script>
+
+<%- include('./partials/footer.ejs')%>

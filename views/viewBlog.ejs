@@ -1,0 +1,44 @@
+<%- include('./partials/header.ejs')%>
+<%- include('./partials/navbar.ejs')%>
+
+<div class="container m-auto w-50">
+    <img src=<%=`/uploads/${blog.coverImage}`%> class="rounded mt-2" width="100%">
+
+    <h1 class="mt-2" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"><%= blog.title%></h1>
+    <% 
+  const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'};
+  const formattedDate = blog.date.toLocaleDateString('en-US', options); %>
+    <small>By <%= blog.author.fullName%> [<%= formattedDate %>]</small>
+
+    <pre class="mt-2" style="font-family: Verdana, Geneva, Tahoma, sans-serif; text-wrap: inherit;"><%= blog.body%></pre>
+</div>
+
+
+<div class="container m-auto w-50">
+   <% if(locals.comments.length > 0) {%> 
+    <h4>Comments: <%= comments.length %></h4>
+          <% comments.forEach(comment => {%> 
+        <div>
+            <img src="<%= comment.author.profileImageUrl %>" class="b-red" width="50px">
+             <strong><%= comment.author.fullName %> </strong>
+            <small><%= comment.date.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric'}) %></small>
+
+            <p class="ms-5 p-1"><%= comment.content %> </p>
+        </div>
+        <% })%>
+
+    <%}%>
+
+    <% if(locals.user){%>
+    <h4>Leave a comment:</h4>
+    <form action="/blog/comment/<%=blog._id%>" method="post">
+        <textarea class="d-block w-100 rounded" name="content" placeholder="Enter your comment" required></textarea>
+    <button type="submit" class="d-block mt-2 btn btn-primary">Submit Comment</button>
+    </form>
+    <%} else {%> 
+        <h4 class="mb-4">Login to comment</h4>
+    <% }%>
+</div>
+
+
+<%- include('./partials/footer.ejs')%>
